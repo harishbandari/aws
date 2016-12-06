@@ -1,0 +1,15 @@
+#!/bin/bash
+#steps to create a new instance
+aws configure
+aws ec2 describe-regions --output table
+aws ec2 describe-availability-zones --region us-east-1 --output table
+#cat > /tmp/o
+aws ec2 describe-images --image-id ami-b73b63a0
+aws ec2 describe-key-pairs
+aws ec2 describe-security-groups --group-id sg-94b06de9 --output table
+#vi my-userdata.sh
+#chmod 777 my-userdata.sh
+#chown :users my-userdata.sh
+aws ec2 run-instances --image-id ami-b73b63a0 --count 1 --instance-type t2.micro --key-name harish1 --user-data file://my-userdata.sh --subnet-id subnet-6852f245 --security-group-ids sg-94b06de9
+
+
